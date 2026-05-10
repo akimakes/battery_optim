@@ -1,0 +1,52 @@
+data:
+  input_csv: data/input/data.csv
+  simulation_output_csv: data/output/simulations/rule_based.csv
+  optimization_output_csv: data/output/simulations/rule_based_optimization.csv
+
+plot: 
+  enabled: true
+  year: 2026 #Year for which the plot should be generated. 
+  month: 3 #Single month plot only.
+  timezone: Europe/Vienna
+  output_file: data/output/simulations/month_plot.png
+
+data_preparation:
+  consumption_timezone: Europe/Vienna
+
+battery:
+  capacity_kwh: 5.74
+  min_soc_fraction: 0.2 #Minimum state of charge as fraction of capacity
+  max_soc_fraction: 0.8 #Max state of charge as fraction of capacity
+  max_charge_kw: 1.2   #charging power in kW
+  max_discharge_kw: 1.2 #discharging power in kW
+  battery_charge_efficiency: 0.95 
+  battery_discharge_efficiency: 0.95
+  inverter_charge_efficiency: 0.97
+  inverter_discharge_efficiency: 0.97
+
+tariff:
+  awattar_markup_eur_per_kwh: 0.015
+  vat_rate: 0.20
+  monthly_base_fee_eur: 5.75
+  grid_fees_eur_per_kwh: 0.0 #Netz NOE side
+  taxes_and_grid_cost_factor: 1.0 #Awattar side. 1.0 means that grid and taxes are the same amount as the pure energy costs. So 1.0 is "doubling" the price.
+
+simulation:
+  time_range_days: full #full or latest N days
+  timestep_minutes: 15 #Keep at 15.
+  no_grid_export: true #true for Nulleinspeisung
+  require_final_soc_equal_initial: false
+
+rule_based_controller:
+  low_price_eur_per_kwh: 0.15 #Price threshold for charging. If the price is below this value, the battery will charge.
+  high_price_eur_per_kwh: 0.18 #Price threshold for discharging. If the price is above this value, the battery will discharge.
+
+optimizer:
+  enabled: false
+  objective: maximize_savings_eur
+  cpu_cores: 8
+  low_price_min_eur_per_kwh: -0.00 #Search range lower bound
+  low_price_max_eur_per_kwh: 0.30 #Search range higher bound
+  high_price_min_eur_per_kwh: 0.00 #Search range lower bound
+  high_price_max_eur_per_kwh: 0.35 #Search range higher bound
+  price_step_eur_per_kwh: 0.01 #Grid search step size.
