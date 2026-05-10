@@ -23,7 +23,7 @@ tests/                           Future tests
 ## Install
 
 ```powershell
-& 'C:\Users\aki\AppData\Local\Python\bin\python.exe' -m pip install -r requirements.txt
+& 'python' -m pip install -r requirements.txt
 ```
 
 ## Run
@@ -34,7 +34,7 @@ all raw files in that folder automatically and ignores files with `merged` in
 the filename.
 
 ```powershell
-& 'C:\Users\aki\AppData\Local\Python\bin\python.exe' run_simulation.py
+& 'python' run_simulation.py
 ```
 
 Each run fetches the required aWATTar market prices from the API configured in
@@ -86,5 +86,5 @@ energy flows, and battery state of charge.
 
 ```powershell
 $env:PYTHONPATH='src'
-& 'C:\Users\aki\AppData\Local\Python\bin\python.exe' -m unittest discover -s tests
+& 'python' -m unittest discover -s tests
 ```
