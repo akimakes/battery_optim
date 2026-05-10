@@ -1,5 +1,5 @@
 data:
-  input_csv: data/input/data.csv
+  house_consumption_dir: data/house_consumption
   simulation_output_csv: data/output/simulations/rule_based.csv
   optimization_output_csv: data/output/simulations/rule_based_optimization.csv
 
@@ -11,7 +11,9 @@ plot:
   output_file: data/output/simulations/month_plot.png
 
 data_preparation:
+  enabled: true
   consumption_timezone: Europe/Vienna
+  awattar_api_url: https://api.awattar.at/v1/marketdata
 
 battery:
   capacity_kwh: 5.74

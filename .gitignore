@@ -1,4 +1,11 @@
 __pycache__/
 *.py[cod]
+.test-tmp/
 
 data/output/
+data/input/data.csv
+data/input/house_consumption_merged.csv
+data/price/awattar.csv
+data/price/awattar.json
+data/price/awattar_fetched.json
+data/price/awattar_fetched.csv

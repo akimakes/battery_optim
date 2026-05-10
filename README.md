@@ -12,7 +12,7 @@ data/input/data.csv              Synchronized 15-minute input data
 data/output/simulations/         Generated simulation results
 data/price/                      Raw or converted price data
 data/house_consumption/          Raw house consumption exports
-scripts/prepare_data.py          Build synchronized input data
+scripts/prepare_data.py          Developer helper for manual data sync
 scripts/json_to_csv.py           Convert aWATTar JSON exports to CSV
 scripts/plot_marketprice.py      Plot historical market prices
 run_simulation.py                Run the current rule-based simulation
@@ -28,9 +28,18 @@ tests/                           Future tests
 
 ## Run
 
+Put one or more raw grid-provider CSV files into `data/house_consumption/`.
+The provider may export multiple one-year segments; `run_simulation.py` merges
+all raw files in that folder automatically and ignores files with `merged` in
+the filename.
+
 ```powershell
 & 'C:\Users\aki\AppData\Local\Python\bin\python.exe' run_simulation.py
 ```
+
+Each run fetches the required aWATTar market prices from the API configured in
+`config/default.yaml`, rebuilds the synchronized input data, then runs the
+simulation.
 
 The runner uses a rule-based controller: charge below a low price threshold and
 discharge above a high price threshold.

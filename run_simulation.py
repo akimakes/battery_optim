@@ -15,6 +15,7 @@ if str(SRC_ROOT) not in sys.path:
 
 from batt.battery import BatteryConfig
 from batt.config import load_config
+from batt.data_preparation import prepare_input_data
 from batt.data_io import filter_latest_days, read_interval_data
 from batt.optimizer import RuleParameterOptimizerConfig, optimize_rule_parameters
 from batt.plotting import PlotConfig, plot_month
@@ -71,7 +72,8 @@ def main() -> None:
     args = parser.parse_args()
 
     config = load_config(PROJECT_ROOT / args.config)
-    df = read_interval_data(PROJECT_ROOT / config["data"]["input_csv"])
+    prepared_input_csv = prepare_input_data(config, PROJECT_ROOT)
+    df = read_interval_data(prepared_input_csv)
     df = filter_latest_days(df, config["simulation"]["time_range_days"])
     tariff = build_tariff_config(config)
     battery = build_battery_config(config)
